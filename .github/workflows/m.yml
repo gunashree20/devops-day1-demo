@@ -1,0 +1,30 @@
+
+name: Demo CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: List project files
+        run: ls -la
+
+      - name: Check README exists
+        run: |
+          if [ -f README.md ]; then
+            echo "README.md found!"
+          else
+            echo "README.md is missing from the repository root."
+            exit 1
+          fi
+
+      - name: Show success message
+        run: echo "CI checks passed!"
