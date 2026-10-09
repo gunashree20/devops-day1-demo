@@ -1,0 +1,21 @@
+
+name: Demo CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Check README exists
+        run: test -f README.md
+
+      - name: Show success message
+        run: echo "CI checks passed!"
